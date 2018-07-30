@@ -52,12 +52,16 @@ public class GenericResource {
     public CommonDTO createAccount(AccountRequestDTO accountRequestDTO) throws Exception {
 
         CommonDTO commonDTO = new CommonDTO();
-        try {
+        try { 
             if (accountRequestDTO == null
                     || accountRequestDTO.getAccountId() == null
                     || accountRequestDTO.getBalance() == null
                     || accountRequestDTO.getEmployeeName() == null) {
                 throw new Exception("Account Id or Balance or Employee Name are missing");
+            }
+            
+            if (accountRequestDTO.getBalance().doubleValue() < 0) {
+              throw new Exception("Balance should be positive value");  
             }
 
             Accounts account = new Accounts();
